@@ -1,14 +1,14 @@
-#matLink{
-    text-decoration: none;
+#matLink {
+  text-decoration: none;
 }
 
 .header {
-    text-align: center;
-    padding: 60px;
+  text-align: center;
+  padding: 60px;
 }
 
 .ngx-demo-content {
-    margin: 20px 0px;
+  margin: 20px 0px;
 }
 
 .ngx-demo-block button {
@@ -16,6 +16,11 @@
 }
 
 h2 > a {
-    color: whitesmoke;
-    font-style: italic;
+  color: whitesmoke;
+  font-style: italic;
+}
+
+.w-100 {
+  width: 100%;
+  min-width: 100%;
 }

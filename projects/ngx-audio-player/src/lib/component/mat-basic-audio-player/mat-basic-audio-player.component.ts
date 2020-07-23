@@ -1,50 +1,90 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { BaseAudioPlayerFunctions } from '../base/base-audio-player.component';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AudioPlayerService } from '../../service/audio-player-service/audio-player.service';
+import { BaseAudioPlayerFunctions } from '../base/base-audio-player.component';
 
 @Component({
-    selector: 'mat-basic-audio-player',
-    templateUrl: './mat-basic-audio-player.component.html',
-    styleUrls: ['./mat-basic-audio-player.component.css', './../base/base-audio-player.component.css']
+  selector: 'mat-basic-audio-player',
+  templateUrl: './mat-basic-audio-player.component.html',
+  styleUrls: [
+    './mat-basic-audio-player.component.css',
+    './../base/base-audio-player.component.css',
+  ],
 })
-export class MatBasicAudioPlayerComponent extends BaseAudioPlayerFunctions implements OnInit {
+export class MatBasicAudioPlayerComponent extends BaseAudioPlayerFunctions
+  implements OnInit {
+  @Output()
+  closePlayer = new EventEmitter();
 
-    @Input()
-    title: string;
+  @Output()
+  nextSong = new EventEmitter();
+  @Output()
+  previousSong = new EventEmitter();
 
-    @Input()
-    audioUrl: string;
+  @Input()
+  closeBtn: boolean;
 
-    @Input()
-    displayTitle = false;
+  @Input()
+  title: string;
 
-    @Input()
-    autoPlay = false;
+  @Input()
+  audioUrl: string;
 
-    @Input()
-    displayVolumeControls = true;
+  @Input()
+  displayTitle = false;
 
-    audioPlayerService: AudioPlayerService;
+  @Input()
+  autoPlay = false;
 
-    constructor() {
-        super();
-        this.audioPlayerService = new AudioPlayerService();
+  @Input()
+  displayVolumeControls = true;
+
+  audioPlayerService: AudioPlayerService;
+
+  constructor() {
+    super();
+    this.audioPlayerService = new AudioPlayerService();
+  }
+
+  ngOnInit() {
+    this.bindPlayerEvent();
+
+    this.player.nativeElement.addEventListener('timeupdate', () => {
+      this.audioPlayerService.setCurrentTime(
+        this.player.nativeElement.currentTime
+      );
+    });
+
+    if (this.autoPlay) {
+      super.play();
     }
 
-    ngOnInit() {
-        this.bindPlayerEvent();
+    this.volume = Math.floor(this.player.nativeElement.volume);
+  }
 
-        this.player.nativeElement.addEventListener('timeupdate', () => {
-            this.audioPlayerService.setCurrentTime(this.player.nativeElement.currentTime);
-        });
+  resetSong(): void {
+    this.player.nativeElement.src = this.audioUrl;
+  }
 
-        if (this.autoPlay) {
-            super.play();
-        }
-    }
+  startClosePlayer() {
+    this.currentTime = this.player.nativeElement.currentTime;
+    this.player.nativeElement.pause();
+    this.closePlayer.next();
+  }
 
-    resetSong(): void {
-        this.player.nativeElement.src = this.audioUrl;
-    }
+  volumeChanged(e) {
+    this.setVolume(e.value);
+    console.log(e.value);
+  }
 
+  startNextSong() {
+    this.currentTime = this.player.nativeElement.currentTime;
+    this.player.nativeElement.pause();
+    this.nextSong.next();
+  }
+
+  startPreviousSong() {
+    this.currentTime = this.player.nativeElement.currentTime;
+    this.player.nativeElement.pause();
+    this.previousSong.next();
+  }
 }
