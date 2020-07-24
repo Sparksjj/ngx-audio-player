@@ -1,0 +1,38 @@
+import { ChangeDetectorRef, OnInit } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSlider } from '@angular/material/slider';
+import { MatTableDataSource } from '@angular/material/table';
+import { Track } from '../../model/track.model';
+import { AudioPlayerService } from '../../service/audio-player-service/audio-player.service';
+import { BaseAudioPlayerFunctions } from '../base/base-audio-player.component';
+export declare class MatAdvancedAudioPlayerComponent extends BaseAudioPlayerFunctions implements OnInit {
+    protected cd: ChangeDetectorRef;
+    audioPlayerService: AudioPlayerService;
+    constructor(cd: ChangeDetectorRef);
+    set playlist(playlist: Track[]);
+    set matPaginator(mp: MatPaginator);
+    displayedColumns: string[];
+    dataSource: MatTableDataSource<Track>;
+    paginator: MatPaginator;
+    timeLineDuration: MatSlider;
+    tracks: Track[];
+    displayTitle: boolean;
+    displayPlaylist: boolean;
+    displayVolumeControls: boolean;
+    pageSizeOptions: number[];
+    expanded: boolean;
+    autoPlay: boolean;
+    private currentIndex;
+    currentTrack: Track;
+    private previousTrack;
+    private nextTrack;
+    ngOnInit(): void;
+    initialize(): void;
+    setDataSourceAttributes(): void;
+    nextSong(): void;
+    previousSong(): void;
+    resetSong(): void;
+    selectTrack(index: number): void;
+    checkIfSongHasStartedSinceAtleastTwoSeconds(): boolean;
+    updateCurrentSong(): void;
+}

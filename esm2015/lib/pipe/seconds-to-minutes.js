@@ -1,0 +1,18 @@
+import { __decorate } from "tslib";
+import { Pipe } from '@angular/core';
+/*
+ * Transform seconds to minutes:seconds
+ * Example : 270 -> 02:30
+*/
+let SecondsToMinutesPipe = class SecondsToMinutesPipe {
+    transform(time) {
+        const minutes = ('0' + Math.floor(time / 60)).slice(-2);
+        const seconds = ('0' + time % 60).slice(-2);
+        return `${minutes}:${seconds}`;
+    }
+};
+SecondsToMinutesPipe = __decorate([
+    Pipe({ name: 'secondsToMinutes' })
+], SecondsToMinutesPipe);
+export { SecondsToMinutesPipe };
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2Vjb25kcy10by1taW51dGVzLmpzIiwic291cmNlUm9vdCI6Im5nOi8vbmd4LWF1ZGlvLXBsYXllci8iLCJzb3VyY2VzIjpbImxpYi9waXBlL3NlY29uZHMtdG8tbWludXRlcy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsT0FBTyxFQUFFLElBQUksRUFBaUIsTUFBTSxlQUFlLENBQUM7QUFDcEQ7OztFQUdFO0FBRUYsSUFBYSxvQkFBb0IsR0FBakMsTUFBYSxvQkFBb0I7SUFDN0IsU0FBUyxDQUFDLElBQVk7UUFDbEIsTUFBTSxPQUFPLEdBQUcsQ0FBQyxHQUFHLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxJQUFJLEdBQUcsRUFBRSxDQUFDLENBQUMsQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQztRQUN4RCxNQUFNLE9BQU8sR0FBRyxDQUFDLEdBQUcsR0FBRyxJQUFJLEdBQUcsRUFBRSxDQUFDLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7UUFDNUMsT0FBTyxHQUFHLE9BQU8sSUFBSSxPQUFPLEVBQUUsQ0FBQztJQUNuQyxDQUFDO0NBQ0osQ0FBQTtBQU5ZLG9CQUFvQjtJQURoQyxJQUFJLENBQUMsRUFBRSxJQUFJLEVBQUUsa0JBQWtCLEVBQUUsQ0FBQztHQUN0QixvQkFBb0IsQ0FNaEM7U0FOWSxvQkFBb0IiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBQaXBlLCBQaXBlVHJhbnNmb3JtIH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG4vKlxuICogVHJhbnNmb3JtIHNlY29uZHMgdG8gbWludXRlczpzZWNvbmRzXG4gKiBFeGFtcGxlIDogMjcwIC0+IDAyOjMwXG4qL1xuQFBpcGUoeyBuYW1lOiAnc2Vjb25kc1RvTWludXRlcycgfSlcbmV4cG9ydCBjbGFzcyBTZWNvbmRzVG9NaW51dGVzUGlwZSBpbXBsZW1lbnRzIFBpcGVUcmFuc2Zvcm0ge1xuICAgIHRyYW5zZm9ybSh0aW1lOiBudW1iZXIpOiBzdHJpbmcge1xuICAgICAgICBjb25zdCBtaW51dGVzID0gKCcwJyArIE1hdGguZmxvb3IodGltZSAvIDYwKSkuc2xpY2UoLTIpO1xuICAgICAgICBjb25zdCBzZWNvbmRzID0gKCcwJyArIHRpbWUgJSA2MCkuc2xpY2UoLTIpO1xuICAgICAgICByZXR1cm4gYCR7bWludXRlc306JHtzZWNvbmRzfWA7XG4gICAgfVxufVxuIl19
