@@ -278,6 +278,7 @@
         <mat-slider (change)="currTimePosChanged($event)"
                     [min]="startOffset"
                     max="{{duration-endOffset}}"
+                    [disabled]="disabledSeek"
                     style="width: 100%"
                     value="{{currentTime}}"></mat-slider>
 
@@ -291,7 +292,8 @@
             </div>
         </section>
 
-        <div class="d-flex ngx-basic-audio-player-duration">
+        <div class="d-flex ngx-basic-audio-player-duration"
+             *ngIf="isFinite(duration)">
             <span *ngIf="duration !== 0.01">
                 -{{duration-endOffset-currentTime |
             secondsToMinutes }}

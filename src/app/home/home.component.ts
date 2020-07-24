@@ -1,34 +1,34 @@
 import { Component, ViewChild } from '@angular/core';
 import { Track } from 'ngx-audio-player/public_api';
-import { MatBasicAudioPlayerComponent, MatAdvancedAudioPlayerComponent } from 'projects/ngx-audio-player/src/public_api';
+import {
+  MatAdvancedAudioPlayerComponent,
+  MatBasicAudioPlayerComponent,
+} from 'projects/ngx-audio-player/src/public_api';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
-
-  constructor() { }
-  private fmaBaseUrl = 'https://files.freemusicarchive.org/storage-freemusicarchive-org/music';
-
-
-
-
+  constructor() {}
+  private fmaBaseUrl =
+    'https://files.freemusicarchive.org/storage-freemusicarchive-org/music';
 
   // Start of Basic Player Instance 1
 
   // Material Style Basic Audio Player Title and Audio URL
   msbapTitle1 = 'In Love | A Himitsu feat. Nori';
-  msbapAudioUrl1 = 'https://audiograb.com/songs/nori-in-love-chill-royalty-free-music-xiMvrlfD.mp3';
+  msbapAudioUrl1 =
+    'http://10.201.117.50:3000/api/v1/app/user/calls/stream?id=10046&vendor=comrec&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0dXNlckBuYXZla3NvZnQuY29tIiwicHNoIjoiPHBzaD4iLCJpYXQiOjE1OTU1MTQzMzEsImV4cCI6MTU5NTYwMDczMSwiYXVkIjoiaHR0cHM6Ly9uYXZla3NvZnQuY29tIiwiaXNzIjoiTmF2ZWtTb2Z0In0.AXtVxD9L8hE_Wm8FNlp2y9hEKPbP4K1MzOm6DkwPaz0';
 
   msbapDisplayTitle1 = true;
   msbapDisplayVolumeControls1 = true;
 
-  // Optional Additional Examples 
+  // Optional Additional Examples
   // - Logging Current Time
 
-  @ViewChild("basic1")
+  @ViewChild('basic1')
   basicPlayer1: MatBasicAudioPlayerComponent;
 
   basicPlayerCurrentTrack1: string;
@@ -39,29 +39,26 @@ export class HomeComponent {
   }
 
   logCurrentTimeBasicPlayer1() {
-    this.basicPlayer1.audioPlayerService.getCurrentTime().subscribe(time => {
+    this.basicPlayer1.audioPlayerService.getCurrentTime().subscribe((time) => {
       this.basicPlayerCurrentTime1 = time;
-    })
+    });
   }
   // End of Basic Player Instance 1
-
-
-
-
 
   // Start of Basic Player Instance 2
 
   // Material Style Basic Audio Player Title and Audio URL
   msbapTitle2 = 'Cartoon – On & On (feat. Daniel Levi) [NCS Release]';
-  msbapAudioUrl2 = 'https://audiograb.com/songs/daniel-levi-chill-royalty-free-music-m5BTrEAILs.mp3';
+  msbapAudioUrl2 =
+    'https://audiograb.com/songs/daniel-levi-chill-royalty-free-music-m5BTrEAILs.mp3';
 
   msbapDisplayTitle2 = true;
   msbapDisplayVolumeControls2 = true;
 
-  // Optional Additional Examples 
+  // Optional Additional Examples
   // - Logging Current Time
 
-  @ViewChild("basic2")
+  @ViewChild('basic2')
   basicPlayer2: MatBasicAudioPlayerComponent;
 
   basicPlayerCurrentTrack2: string;
@@ -72,32 +69,28 @@ export class HomeComponent {
   }
 
   logCurrentTimeBasicPlayer2() {
-    this.basicPlayer2.audioPlayerService.getCurrentTime().subscribe(time => {
+    this.basicPlayer2.audioPlayerService.getCurrentTime().subscribe((time) => {
       this.basicPlayerCurrentTime2 = time;
     });
   }
   // End of Basic Player Instance 2
 
-
-
-
-
   // Material Style Advance Audio Player Playlist
 
-  @ViewChild("advanced")
+  @ViewChild('advanced')
   advancedPlayer: MatAdvancedAudioPlayerComponent;
 
   msaapPlaylist: Track[] = [
     {
       title: 'In Love | A Himitsu feat. Nori',
       link:
-        'https://audiograb.com/songs/nori-in-love-chill-royalty-free-music-xiMvrlfD.mp3'
+        'https://audiograb.com/songs/nori-in-love-chill-royalty-free-music-xiMvrlfD.mp3',
     },
     {
       title: 'Cartoon – On & On (feat. Daniel Levi) [NCS Release]',
       link:
-        'https://audiograb.com/songs/daniel-levi-chill-royalty-free-music-m5BTrEAILs.mp3'
-    }
+        'https://audiograb.com/songs/daniel-levi-chill-royalty-free-music-m5BTrEAILs.mp3',
+    },
   ];
 
   msaapDisplayTitle = true;
@@ -111,23 +104,23 @@ export class HomeComponent {
   msaapPlaylist2: Track[] = [
     {
       title: '1400 (by Yung Kartz)',
-      link: `${this.fmaBaseUrl}/no_curator/Yung_Kartz/August_2018/Yung_Kartz_-_10_-_1400.mp3`
+      link: `${this.fmaBaseUrl}/no_curator/Yung_Kartz/August_2018/Yung_Kartz_-_10_-_1400.mp3`,
     },
     {
       title: 'Epic Song (by BoxCat Games)',
-      link: `${this.fmaBaseUrl}/ccCommunity/BoxCat_Games/Nameless_The_Hackers_RPG_Soundtrack/BoxCat_Games_-_10_-_Epic_Song.mp3`
-    }
+      link: `${this.fmaBaseUrl}/ccCommunity/BoxCat_Games/Nameless_The_Hackers_RPG_Soundtrack/BoxCat_Games_-_10_-_Epic_Song.mp3`,
+    },
   ];
 
   msaapPlaylist3: Track[] = [
     {
       title: 'Hachiko (The Faithful Dog) (by The Kyoto)',
-      link: `${this.fmaBaseUrl}/ccCommunity/The_Kyoto_Connection/Wake_Up/The_Kyoto_Connection_-_09_-_Hachiko_The_Faithtful_Dog.mp3`
+      link: `${this.fmaBaseUrl}/ccCommunity/The_Kyoto_Connection/Wake_Up/The_Kyoto_Connection_-_09_-_Hachiko_The_Faithtful_Dog.mp3`,
     },
     {
       title: 'Starling (by Podington Bear)',
-      link: `${this.fmaBaseUrl}/Music_for_Video/Podington_Bear/Solo_Instruments/Podington_Bear_-_Starling.mp3`
-    }
+      link: `${this.fmaBaseUrl}/Music_for_Video/Podington_Bear/Solo_Instruments/Podington_Bear_-_Starling.mp3`,
+    },
   ];
 
   currentTrack: Track = null;
@@ -147,15 +140,19 @@ export class HomeComponent {
   }
 
   logCurrentTrack() {
-    this.advancedPlayer.audioPlayerService.getCurrentTrack().subscribe(track => {
-      this.currentTrack = track;
-    });
+    this.advancedPlayer.audioPlayerService
+      .getCurrentTrack()
+      .subscribe((track) => {
+        this.currentTrack = track;
+      });
   }
 
   logCurrentTime() {
-    this.advancedPlayer.audioPlayerService.getCurrentTime().subscribe(time => {
-      this.currentTime = time;
-    });
+    this.advancedPlayer.audioPlayerService
+      .getCurrentTime()
+      .subscribe((time) => {
+        this.currentTime = time;
+      });
   }
 
   consoleLogCurrentData() {
@@ -168,23 +165,19 @@ export class HomeComponent {
 
   appendTracksToPlaylist() {
     if (this.counter === 1) {
-      this.msaapPlaylist2.map(track => {
+      this.msaapPlaylist2.map((track) => {
         this.msaapPlaylist.push(track);
       });
       this.advancedPlayer.audioPlayerService.setPlaylist(this.msaapPlaylist);
       this.counter = this.counter + 1;
     } else if (this.counter === 2) {
-      this.msaapPlaylist3.map(track => {
+      this.msaapPlaylist3.map((track) => {
         this.msaapPlaylist.push(track);
       });
       this.advancedPlayer.audioPlayerService.setPlaylist(this.msaapPlaylist);
       this.appendTracksToPlaylistDisable = true;
     }
   }
-
-
-
-
 
   // Start needed for demo purpose
   // Basic Player 1

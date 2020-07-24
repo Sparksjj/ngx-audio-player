@@ -1,4 +1,10 @@
-import { ElementRef, Input, Output, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  ElementRef,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { MatSlider } from '@angular/material/slider';
 import { Subject } from 'rxjs';
 import { Track } from '../../model/track.model';
@@ -33,39 +39,47 @@ export class BaseAudioPlayerFunctions {
 
   @Input()
   public endOffset = 0;
-
+  constructor(protected cd: ChangeDetectorRef) {}
   currTimePosChanged(event) {
     this.player.nativeElement.currentTime = event.value;
+    this.cd.markForCheck();
   }
 
   bindPlayerEvent(): void {
     this.player.nativeElement.addEventListener('playing', () => {
       this.isPlaying = true;
       this.duration = Math.floor(this.player.nativeElement.duration);
+      this.cd.markForCheck();
     });
     this.player.nativeElement.addEventListener('pause', () => {
       this.isPlaying = false;
+      this.cd.markForCheck();
     });
     this.player.nativeElement.addEventListener('timeupdate', () => {
       this.currentTime = Math.floor(this.player.nativeElement.currentTime);
       if (this.currentTime >= this.duration - this.endOffset) {
         this.player.nativeElement.pause();
       }
+      this.cd.markForCheck();
     });
     this.player.nativeElement.addEventListener('volume', () => {
       this.volume = Math.floor(this.player.nativeElement.volume);
+      this.cd.markForCheck();
     });
     if (!this.iOS) {
       this.player.nativeElement.addEventListener('loadstart', () => {
         this.loaderDisplay = true;
       });
+      this.cd.markForCheck();
     }
     this.player.nativeElement.addEventListener('loadeddata', () => {
       this.loaderDisplay = false;
       this.duration = Math.floor(this.player.nativeElement.duration);
+      this.cd.markForCheck();
     });
     this.player.nativeElement.addEventListener('ended', () => {
       this.trackEnded.next('ended');
+      this.cd.markForCheck();
     });
   }
 
@@ -85,6 +99,7 @@ export class BaseAudioPlayerFunctions {
       this.currentTime = this.player.nativeElement.currentTime;
       this.player.nativeElement.pause();
     }
+    this.cd.markForCheck();
   }
 
   play(track?: Track): void {
@@ -92,9 +107,11 @@ export class BaseAudioPlayerFunctions {
       this.startOffset = track.startOffset || 0;
       this.endOffset = track.endOffset || 0;
     }
+    this.cd.markForCheck();
 
     setTimeout(() => {
       this.player.nativeElement.play();
+      this.cd.markForCheck();
     }, 50);
   }
 
@@ -104,10 +121,12 @@ export class BaseAudioPlayerFunctions {
     } else {
       this.setVolume(0);
     }
+    this.cd.markForCheck();
   }
 
   protected setVolume(vol) {
     this.volume = vol;
     this.player.nativeElement.volume = this.volume;
+    this.cd.markForCheck();
   }
 }

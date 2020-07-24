@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { AudioPlayerService } from '../../service/audio-player-service/audio-player.service';
 import { BaseAudioPlayerFunctions } from '../base/base-audio-player.component';
 
@@ -36,12 +43,15 @@ export class MatBasicAudioPlayerComponent extends BaseAudioPlayerFunctions
   autoPlay = false;
 
   @Input()
+  disabledSeek = false;
+
+  @Input()
   displayVolumeControls = true;
 
   audioPlayerService: AudioPlayerService;
-
-  constructor() {
-    super();
+  isFinite = isFinite;
+  constructor(protected cd: ChangeDetectorRef) {
+    super(cd);
     this.audioPlayerService = new AudioPlayerService();
   }
 
@@ -59,6 +69,7 @@ export class MatBasicAudioPlayerComponent extends BaseAudioPlayerFunctions
     }
 
     this.volume = Math.floor(this.player.nativeElement.volume);
+    this.cd.markForCheck();
   }
 
   resetSong(): void {
@@ -69,22 +80,25 @@ export class MatBasicAudioPlayerComponent extends BaseAudioPlayerFunctions
     this.currentTime = this.player.nativeElement.currentTime;
     this.player.nativeElement.pause();
     this.closePlayer.next();
+    this.cd.markForCheck();
   }
 
   volumeChanged(e) {
     this.setVolume(e.value);
-    console.log(e.value);
+    this.cd.markForCheck();
   }
 
   startNextSong() {
     this.currentTime = this.player.nativeElement.currentTime;
     this.player.nativeElement.pause();
     this.nextSong.next();
+    this.cd.markForCheck();
   }
 
   startPreviousSong() {
     this.currentTime = this.player.nativeElement.currentTime;
     this.player.nativeElement.pause();
     this.previousSong.next();
+    this.cd.markForCheck();
   }
 }
